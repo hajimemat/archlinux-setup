@@ -15,7 +15,7 @@ install: /bin/yaourt
 		leafpad  \
 		nautilus \
 		sakura  \
-		gnome-session gnome-shell gnome-settings-daemon gnome-tweak-tool gnome-keyring gnome-encfs-manager \
+		seahorce gnome-session gnome-shell gnome-settings-daemon gnome-tweak-tool gnome-keyring gnome-encfs-manager \
 		i3-wm \
 		conky \
 		compton \
