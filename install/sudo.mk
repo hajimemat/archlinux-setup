@@ -2,6 +2,8 @@ include config.mk
 
 prepare: /bin/sudo
 	make  -f install/sudo.mk /etc/sudoers.d/admin
+/bin/sudo:
+	pacman -S --noconfirm --needed sudo
 
 /etc/sudoers.d/admin:
 	# sudoersの設定をする
