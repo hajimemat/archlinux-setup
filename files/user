@@ -1,2 +1,0 @@
-kurari ALL=(ALL) NOPASSWD: ALL
-Defaults:kurari env_keep +=SSH_AUTH_SOCK

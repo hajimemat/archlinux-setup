@@ -1,3 +1,9 @@
 dein:=~/dein
-admin:=kurari
+bootloader_directory:=/boot
+bootloader_id:=grub
+install_type:=efi
+admin_user:=kurari
+admin_id:=16000
+admin_name:=admin
+lang:=ja
 yaourt:=yaourt -S --noconfirm --needed 

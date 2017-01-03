@@ -1,0 +1,279 @@
+##################################################
+# オプション
+##################################################
+
+# modキーをwindowsキーに割り当てる
+set $mod Mod4
+
+# modキーを押しながらマウスで操作
+floating_modifier $mod
+
+# マウスに追随してフォーカスを切り替えるか yes|no
+focus_follows_mouse no
+# 画面移動時にマウスを追随させる output|none
+mouse_warping output
+
+# メインターミナルの起動スクリプト
+set $MainTerminal sakura -t MainTerminal -e ~/bin/tmux-single main
+
+##################################################
+# 見た目
+##################################################
+
+# 全体のフォントを設定する
+font pango:Source Han Code JP 12px
+
+#-------------------------------------------------
+# 配色を設定
+# 構文: 配色先 枠線 背景色 テキスト チャイルド
+#-------------------------------------------------
+# 基本配色は暗くする。
+# 現在フォーカス中のウインドウがわかりやすくする
+# フォーカスが当たっている
+client.focused             #1793D0   #333333    #66FFCC  #222222
+client.focused_inactive    #000000   #222222    #FFFFFF  #222222
+# フォーカスが当たっていない
+client.unfocused           #000000   #222222    #EEEEEE  #222222
+# 通知中
+client.urgent              #FF0000   #FF0000    #FF0000  #222222
+
+
+# ---------------------------------------
+# ステータスバーの設定
+# conkyを使って表示する
+bar {
+    # ステータスの表示にconkyを使う
+    status_command ~/.start-conky.sh
+    tray_output DP1
+    position top
+
+    colors {
+        statusline #333333
+    }
+}
+
+#######################################################################
+# ワークスペースの設定
+#######################################################################
+# 3モニタあるので、その割付をする
+# 1-7までメイン
+# 7をサブ１
+# 8,9をサブ２
+
+# モニタの手動登録
+set $monL eDP1
+set $monLU VGA1
+set $monR DP1
+
+# ワークスペースと物理画面の割当
+workspace 1 output $monR
+workspace 2 output $monR
+workspace 3 output $monR
+workspace 4 output $monR
+workspace 5 output $monR
+workspace 6 output $monR
+workspace 7 output $monL
+workspace 8 output $monLU
+workspace 9 output $monLU
+workspace 10 output $monLU
+
+
+
+##################################################
+# レイアウトの設定
+##################################################
+
+#-------------------------------------------------
+# 起動時に配置されるワークスペスを固定する
+#
+# 構文: assign [条件] ワークスペース
+#-------------------------------------------------
+assign   [class="(?i)thunderbird"]    5:thunderbird
+assign   [class="(?i)skype"]          5:skype
+assign   [class="(?i)keepassx"]       5:keepassx
+assign   [class="(?i)messenger for desktop"] 5:facebook
+assign   [class="(?i)dia"] 5:dia
+assign   [title="(?i)MainTerminal"]   1
+
+#-------------------------------------------------
+# フロートさせるアプリケーション群
+# 
+# 起動されるWindowに属性を与える
+# 構文: for_window [条件] 属性
+# 条件は正規表現が使えるので大文字小文字を
+# 区別させないために(?i)を与えている
+#-------------------------------------------------
+# for_window [class="(?i)keepassx"] floating enable
+# for_window [class="(?i)skype"] floating enable
+# for_window [class="(?i)messenger for desktop"] floating enable
+# for_window [class="(?i)Tunderbird"] floating enable
+for_window [class="(?i)pavucontrol"] floating enable
+for_window [class="(?i)feh"] floating enable
+#for_window [class="(?i)nautilus"] floating enable
+for_window [title="(?i)xprop"] floating enable
+for_window [title="(?i)gimp"] floating enable
+for_window [title="(?i)simplescreenrecorder"] floating enable
+#for_window [title="(?i)dia"] floating enable
+
+##################################################
+# 自動起動アプリ
+##################################################
+
+# network-manager-applet
+exec --no-startup-id nm-applet
+# クリップボード履歴
+exec parcellite
+# スクリーンセーバー
+exec "xscreensaver -no-splash"
+# 省電力マネージャー
+exec xfce4-power-manager
+# コンピズ
+exec compton
+# 背景
+exec "feh --bg-scale /home/kurari/sky37.jpg"
+# スカイプ
+exec skyp
+# フェイスブックメッセンジャー
+exec "messengerfordesktop --os-startup"
+# encfsの復号
+exec "gnome-encfs-manager"
+# メーラ
+exec thunderbird
+# キーパスを起動
+exec keepassx
+# メインのターミナルを起動する
+exec $MainTerminal
+
+
+##################################################
+# キーマップ
+##################################################
+#
+# コンフィグをリロードする
+bindsym $mod+Shift+c reload
+# i3を再起動する
+bindsym $mod+Shift+r restart
+# i3を終了する
+bindsym $mod+Shift+e exec i3-msg exit
+
+# modキー+Enterでsakura(ターミナル)を起動
+bindsym $mod+Return exec --no-startup-id  sakura
+
+# windowを閉じる
+bindsym $mod+Shift+q kill
+# dmenuを呼び出す
+#bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec /usr/bin/j4-dmenu-desktop
+bindsym $mod+d exec "/usr/bin/rofi -modi 'combi,window,windowcd,run,drun,ssh' -show 'combi' -combi-modi 'window,run,ssh' -font 'Source Han Code JP 16' -width '100' -padding '80' -lines '8' -color-enabled 'true' -color-window '#111111,#111111,#268bd2' -color-normal '#111111,#ffffff,#111111,#268bd2,#ffffff' -color-active '#111111,#268bd2,#111111,#268bd2,#000022' -color-urgent '#111111,#f3843d,#111111,#268bd2,#ffc39c' -separator-style 'none' -opacity '60' -hide-scrollbar -kb-cancel 'Escape,Control+g,Control+bracketleft,Control+c' -kb-mode-next 'Shift+Right,Control+Tab,Control+i'"
+
+# フォーカスの切り替え
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+# windowの移動
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+# 分割モード縦
+bindsym $mod+Shift+v split h
+# 分割モード横
+bindsym $mod+v split v
+# 親コンテナをフォーカス
+bindsym $mod+a focus parent
+# フルスクリーンモード
+bindsym $mod+f fullscreen toggle
+# コンテナレイアウトをスタックに
+bindsym $mod+Shift+s layout stacking
+# コンテナレイアウトをタブに
+bindsym $mod+w layout tabbed
+# コンテナレイアウトを分割に
+bindsym $mod+e layout toggle split
+# フローティングトグル
+bindsym $mod+Shift+space floating toggle
+# フローティングフォーカストグル
+bindsym $mod+space focus mode_toggle
+# ワークスペースの切り替え
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+# ワークスペースの移動
+bindsym $mod+Shift+1 move workspace 1
+bindsym $mod+Shift+2 move workspace 2
+bindsym $mod+Shift+3 move workspace 3
+bindsym $mod+Shift+4 move workspace 4
+bindsym $mod+Shift+5 move workspace 5
+bindsym $mod+Shift+6 move workspace 6
+bindsym $mod+Shift+7 move workspace 7
+bindsym $mod+Shift+8 move workspace 8
+bindsym $mod+Shift+9 move workspace 9
+bindsym $mod+Shift+0 move workspace 10
+
+#----------------------------------------
+# リサイズモードの定義
+#----------------------------------------
+set $resize Resize h j k l cancel: ESC,ENTER
+# リサイズモードへ突入
+bindsym $mod+r mode "$resize"
+mode "$resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+#----------------------------------------
+# 通常使用のツーストロークバインディング
+#
+# $mod+; したあとに押しやすいのは何だろう
+# kl,.io あたりだけど意味がないから覚えづらい 
+# 説明でも表示しようか
+#----------------------------------------
+set $MyCommand Return(MainTerminal) j(Firefox) k(keepasx) l(mail)
+bindsym $mod+semicolon mode "$MyCommand"
+mode "$MyCommand" {
+    # ドロップメニュー活用
+    bindsym $mod+semicolon exec ~/bin/myDmenu; mode "default"
+    bindsym $mod+space exec ~/bin/myDmenu; mode "default"
+    # メインターミナルにフォーカスを飛ばす
+    bindsym Return exec runorraise title MainTerminal "$MainTerminal"; mode "default"
+    bindsym l exec runorraise class Thunderbird thunderbird; mode "default"
+    bindsym j exec runorraise class Firefox firefox; mode "default"
+    bindsym k exec runorraise class keepassx keepassx; mode "default"
+
+    bindsym Escape mode "default"
+    bindsym semicolon exec "rofi -show combi -combi-modi 'window,run'"; mode "default"
+    # bindsym $mod+f exec rulorraise title Firefox firefox
+    # bindsym $mod+m exec runorraise class Thunderbird thunderbird
+    # bindsym $mod+s exec runorraise class Skype skype
+    # bindsym $mod+v exec runorraise class Vcl vlc
+    # bindsym $mod+k exec runorraise class keepassx keepassx;
+    # bindsym f exec runorraise title Firefox firefox; mode "default" 
+    # bindsym m exec runorraise title Thunderbird thunderbird; mode "default" 
+    # bindsym s exec runorraise class Skype skype; mode "default"
+    # bindsym v exec runorraise class Vcl vlc; mode "default"
+    # bindsym l exec xscreensaver-command --lock; mode "default"
+    # bindsym 1 workspace 1; mode "default"
+    # bindsym 2 workspace 2; mode "default"
+    # bindsym 3 workspace 3; mode "default"
+    # bindsym 4 workspace 4; mode "default"
+    # bindsym 5 workspace 5; mode "default"
+    # bindsym 6 workspace 6; mode "default"
+    # bindsym 7 workspace 7; mode "default"
+    # bindsym 8 workspace 8; mode "default"
+    # bindsym 9 workspace 9; mode "default"
+}
+
+# Firefoxを更新する
+bindsym Control+Shift+r exec sh -c 'xdotool search --all --onlyvisible --class firefox | xargs -I {} xdotool key --window "{}" "CTRL+F5"'
