@@ -1,0 +1,6 @@
+#!/bin/bash
+NAME=${NAME:-main}
+
+tmux a -t $NAME || tmux new -s $NAME
+
+exit $?

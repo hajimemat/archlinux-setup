@@ -1,0 +1,12 @@
+[ -f ~/.screenlayout/default.sh ] && source ~/.screenlayout/default.sh
+
+export LANG=ja_JP.UTF-8
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export DefaultIMModule=fcitx
+export XMODIFIERS="@im=fcitx"
+
+which fcitx > /dev/null && fcitx
+which pulseaudio > /dev/null && pulseaudio --start
+
+[ -f ~/.xprofile.local ] && source ~/.xprofile.local

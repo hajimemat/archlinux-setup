@@ -1,3 +1,5 @@
+include config.mk
+
 install: 
 	make -f make/vim.mk ~/vimrc
 	cd ~/vimrc && make -f archlinux.mk

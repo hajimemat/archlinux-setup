@@ -1,0 +1,11 @@
+#!/bin/bash
+
+MONITOR=${1}
+NAME=$(date +%Y%m%d-%H%M%S).png
+xrandr|grep "^${MONITOR}"
+SIZE=$(xrandr|grep "^${MONITOR}"|cut -d" " -f4)
+OPTIONS=""
+OPTIONS+="-resize 1200x1200"
+import -window root -trim -crop $SIZE $OPTIONS $NAME
+feh $NAME
+exit 0

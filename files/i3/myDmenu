@@ -1,0 +1,41 @@
+#!/bin/bash
+
+cmd=$(cat <<EOF | rofi -dmenu -p "i3 menu: " -format s
+MainTerminal
+firefox
+thunderbird
+keepassx
+nautilus
+xprop
+sakura
+screenshot DP1
+screenshot eDP1
+screenshot VGA1
+edit ~/.config/i3/config
+edit $HOME/.dotfiles/Makefile
+edit $HOME/.dotfiles/vim/rc/vimrc
+lock
+exit
+cansel
+EOF)
+
+case "$cmd" in
+    MainTerminal) runorraise title MainTerminal 'sakura -t MainTerminal -e ./tmux-single main';;
+    firefox) runorraise class Firefox firefox;;
+    thunderbird) runorraise class Thunderbird thunderbird;;
+    keepassx) runorraise class keepassx keepassx;;
+    sakura) sakura ;;
+    screenshot*) ~/bin/ss-monitor ${cmd##screenshot } ;;
+    lock) xscreensaver-command --lock;;
+    edit*)
+        # rofi -e "vim ${cmd##edit }"
+        sakura -t "$cmd" -e "sh -c \"$EDITOR ${cmd##edit }\""
+    ;;
+    exit) i3-msg exit;;
+    xprop) 
+        xprop > /tmp/tmp$$
+        sakura -t "$cmd" -e $EDITOR /tmp/tmp$$
+        ;;
+    *) 
+        sh -c "$cmd"  || rofi -e "noting to do $cmd" ;;
+esac

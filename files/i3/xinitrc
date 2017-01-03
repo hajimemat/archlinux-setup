@@ -1,0 +1,5 @@
+source ~/.xprofile
+
+gsettings set org.gnome.desktop.interface scaling-factor 1
+
+exec gnome-session --session=i3-gnome

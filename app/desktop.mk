@@ -4,52 +4,26 @@ include config.mk
 install: /bin/yaourt
 	# 基本アプリケーション
 	$(yaourt) \
-		# グラフィックドライバ
 		xf86-video-vesa xf86-video-ati xf86-video-nouveau xf86-video-intel libva-intel-driver \
-		# Xサーバアプリケーション
-		xorg-server xorg-server-utils xorg-xinit xorg-xclock  \
-		# Xツール
+		xorg-server xorg-server-utils xorg-xinit xorg-xclock \
 		xorg-xwininfo xorg-xprop xdotool \
-		# お守り
 		xterm \
-		# 画面設定
-		arandr xrandr \
-		# 音声
-		pulseaudio pulseaudio-elsa pavucontrol \
-		# ブラウザ　
+		arandr xorg-xrandr \
+		pulseaudio pulseaudio-alsa pavucontrol \
 		firefox firefox-i18n-ja hal-flash flashplugin \
-		# Google-chrome
-		google-chrome \
-		# メーラー
-		thunderbird thunderbird-i18n-ja \
-		# メモ帳
-		leafpad \
-		# ファイルエクスプローラ
+		thunderbird thunderbird-i18n-ja  \
+		leafpad  \
 		nautilus \
-		# ターミナル
-		sakura \
-		# Gnome
-		gnome-session gnome-settings-daemon gnome-tweak-tool gnome-keyring gnomme-encfs-manager \
-		# i3wm
+		sakura  \
+		gnome-session gnome-shell gnome-settings-daemon gnome-tweak-tool gnome-keyring gnome-encfs-manager \
 		i3-wm \
 		conky \
 		compton \
-		# アプレット
 		network-manager-applet \
-		# 画像ビューワ
 		feh \
-		# 画像編集
-		imagemagick gpaint \
-		# 電源管理マネージャー
+		imagemagick \
 		xfce4-power-manager \
-		# クリップボード
-		xsel parcellite \
-		# PDFビューワ
-		evince popper-data \
-		# スクリーンセーバー 
-		xscreensaver \
-	# フォント表示をきれいにする
-	grep -q '^\[infinality-bundle' ||\
-	echo -e '[infinality-bundle]\nSigLevel = Never\nServer = http://bohoomil.com/repo/$$arch' |\
-	sudo tee -a /etc/pacman.conf
-	$(yaourt) infinality-bundle
+		xsel parcellite  \
+		evince poppler-data \
+		google-chrome  \
+		xscreensaver 
