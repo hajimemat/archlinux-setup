@@ -1,0 +1,4 @@
+firefoxでnetflix
+
+UserAgentをwindowsにする
+DRMをダウンロード
