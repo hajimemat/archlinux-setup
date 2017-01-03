@@ -1,4 +1,7 @@
-dein:=~/dein
+.PHONY: install
+
+gdrive_share:=~/gdrive_share
+gdrive_id:=0B7CXRPOzXKZ4QUljYXFQb20yeFU 
 bootloader_directory:=/boot
 bootloader_id:=grub
 install_type:=efi
@@ -9,4 +12,3 @@ admin_name:=admin
 country:=Japan
 lang:=ja
 yaourt:=yaourt -S --noconfirm --needed 
-.PHONY: install

@@ -92,7 +92,7 @@ df -lh
 /dev/sdf2         29G   45M   27G    1% /mnt
 /dev/sdf1        511M  4.0K  511M    1% /mnt/boot
 # 基礎システム構築
-sudo pacstrap /mnt base
+sudo pacstrap /mnt base make
 genfstab -U -p /mnt  | sudo tee /mnt/etc/fstab
 sudo git clone http://github.com/hajimemat/archlinux-setup /mnt/root/archlinux-setup
 sudo ls -la /mnt/root/archlinux-setup
@@ -123,8 +123,17 @@ make -f install/sudo.mk
 make -f install/user.mk
 make -f install/yaourt.mk
 make -f install/efi.mk
-
-
-
-
+# 基本的なツール
+make -f app/base.mk
+# ネットワークの設定
+make -f setup/networking.mk
+# 言語設定
+make -f lang/en.mk
+make -f lang/ja.mk
+# desktop
+make -f app/desktop.mk
+make -f app/desktop-ja.mk
+make -f app/i3-gnome.mk
+# マルチメディア
+make -f app/multimedia.mk
 ```
