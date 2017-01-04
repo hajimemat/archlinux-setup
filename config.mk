@@ -12,3 +12,5 @@ admin_name:=admin
 country:=Japan
 lang:=ja
 yaourt:=yaourt -S --noconfirm --needed 
+
+dir:=$(CURDIR)

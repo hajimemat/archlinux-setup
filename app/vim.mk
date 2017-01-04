@@ -1,7 +1,8 @@
 include config.mk
 
-install: 
-	make -f make/vim.mk ~/vimrc
-	cd ~/vimrc && make -f archlinux.mk
-~/vimrc:
-	git clone https://github.com/hajimemat/vim-settings ~/vimrc 
+install: /usr/bin/pip /usr/bin/nvim
+	sudo pip install --upgrade neovim
+/usr/bin/pip:
+	$(yaourt) python-pip
+/usr/bin/nvim:
+	$(yaour) neovim

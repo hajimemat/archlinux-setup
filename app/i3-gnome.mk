@@ -1,6 +1,6 @@
 include config.mk
 
-make:=make -f app/i3-gnome.mk
+make:=make -f $(dir)/app/i3-gnome.mk
 
 install: /bin/sudo
 	make -f app/i3.mk

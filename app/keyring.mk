@@ -1,6 +1,6 @@
 include config.mk
 
-make:=make -f app/keyring
+make:=make -f $(dir)/app/keyring
 
 all:
 	$(make) git-http

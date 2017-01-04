@@ -2,7 +2,7 @@ include config.mk
 
 install: /usr/bin/gdrive
 	gdrive list
-	make -f app/gdrive.mk $(gdrive_share)
+	make -f $(dir)/app/gdrive.mk $(gdrive_share)
 
 /usr/bin/gdrive:
 	curl -JL "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download" -o /tmp/$(@F)
