@@ -10,14 +10,15 @@ install: /bin/yaourt
 		xterm \
 		arandr xorg-xrandr \
 		pulseaudio pulseaudio-alsa pavucontrol \
-		firefox firefox-i18n-ja hal-flash flashplugin \
+		firefox firefox-i18n-ja flashplugin \
 		thunderbird thunderbird-i18n-ja  \
 		leafpad  \
 		nautilus \
 		sakura  \
-		seahorce gnome-session gnome-shell gnome-settings-daemon gnome-tweak-tool gnome-keyring gnome-encfs-manager \
+		seahorse gnome-session gnome-shell gnome-settings-daemon gnome-tweak-tool gnome-keyring gnome-encfs-manager \
 		i3-wm \
 		conky \
+		rofi \
 		compton \
 		network-manager-applet \
 		feh \
@@ -25,5 +26,4 @@ install: /bin/yaourt
 		xfce4-power-manager \
 		xsel parcellite  \
 		evince poppler-data \
-		google-chrome  \
 		xscreensaver 

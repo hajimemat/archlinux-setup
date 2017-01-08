@@ -5,4 +5,4 @@ install: /usr/bin/pip /usr/bin/nvim
 /usr/bin/pip:
 	$(yaourt) python-pip
 /usr/bin/nvim:
-	$(yaour) neovim
+	$(yaourt) neovim

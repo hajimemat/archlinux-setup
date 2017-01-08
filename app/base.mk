@@ -6,4 +6,4 @@ install: /bin/yaourt
 	$(yaourt) base base-devel git wget curl openssh tmux zsh zsh-completions encfs networkmanager
 	$(yaourt) pkgfile ntfs-3g arch-install-scripts gdisk htop iotop iftop lsof strace bind-tools
 	# vim
-	make -f app/vim.mk
+	make -f $(dir)/app/vim.mk

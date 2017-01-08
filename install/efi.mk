@@ -9,7 +9,6 @@ install:
 		--efi-directory=$(bootloader_directory) \
 		--bootloader-id=$(bootloader_id) \
 		--recheck \
-		--debug \
-		--removable
+		--debug
 	# Grubメニューをインストール
 	grub-mkconfig -o $(bootloader_directory)/grub/grub.cfg
