@@ -12,4 +12,5 @@ install: /bin/yaourt
 		xfce4-power-manager \
 		xsel parcellite  \
 		evince poppler-data \
-		xscreensaver 
+		xscreensaver \
+		keepassxc
